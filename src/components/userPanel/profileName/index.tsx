@@ -12,7 +12,7 @@ function ProfileName(props: any) {
       <div className="name">
         <h2>{props.data.name}</h2>
         <h6>{props.data.login}</h6>
-        <p>This profile has no bio</p>
+        <p>{props.data.bio ? props.data.bio : "This profile has no bio"}</p>
       </div>
       <div className="joined">
         <h3>Joined {formattedDate}</h3>

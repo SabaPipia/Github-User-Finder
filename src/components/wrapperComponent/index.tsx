@@ -3,6 +3,8 @@ import Header from "../header";
 import InputField from "../search/inputField";
 import ProfileImage from "../userPanel/profileImage";
 import ProfileName from "../userPanel/profileName";
+import ProfileOverview from "../userPanel/profileOverview";
+import ProfileLinks from "../userPanel/profileLinks";
 import "./style.scss";
 
 function WrapperComponent() {
@@ -10,13 +12,15 @@ function WrapperComponent() {
   const [githubUser, setGithubUser]: any = useState();
   const [userFound, setUserFound]: any = useState(false);
 
+  const Token = "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";
+
   const fetchData = async () => {
     try {
       const response = await fetch(
         `https://api.github.com/users/${githubUser}`,
         {
           headers: {
-            Authorization: `token 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`,
+            Authorization: `token ${Token}`,
           },
         }
       );
@@ -31,7 +35,12 @@ function WrapperComponent() {
       console.error("Error while fetching data:", error);
     }
   };
-  // console.log(githubData);
+  console.log(githubData);
+  const githubUserDataI = {
+    public_repos: githubData.public_repos,
+    followers: githubData.followers,
+    following: githubData.following,
+  };
   return (
     <div className="wrapper">
       <div className="wrapperHeader">
@@ -52,6 +61,8 @@ function WrapperComponent() {
           </div>
           <div className="wrapperUserInfo">
             <ProfileName data={githubData} />
+            <ProfileOverview data={githubUserDataI} />
+            <ProfileLinks data={githubData} />
           </div>
         </div>
       ) : null}

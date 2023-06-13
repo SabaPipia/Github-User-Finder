@@ -14,4 +14,7 @@ body {
   background-color: #1e2a47;
   display: grid;
   grid-template-columns: 30fr 70fr;
+  .wrapperPicture {
+    height: 100%;
+  }
 }
