@@ -12,7 +12,7 @@ function WrapperComponent() {
   const [githubUser, setGithubUser]: any = useState();
   const [userFound, setUserFound]: any = useState(false);
 
-  const Token = "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";
+  const Token = "{yourToken}";
 
   const fetchData = async () => {
     try {
