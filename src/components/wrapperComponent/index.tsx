@@ -7,34 +7,54 @@ import "./style.scss";
 
 function WrapperComponent() {
   const [githubData, setGithubData]: any = useState([]);
-  const [githubUser, setGithubUser] = useState("SabaPipia");
-  const fetchData = () => {
-    return fetch(`https://api.github.com/users/${githubUser}`)
-      .then((response) => response.json())
-      .then((data) => setGithubData(data));
-  };
-  // useEffect(() => {
-  //   fetchData();
+  const [githubUser, setGithubUser]: any = useState();
+  const [userFound, setUserFound]: any = useState(false);
 
-  // }, []);
-  // all info
-  console.log(githubData);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://api.github.com/users/${githubUser}`,
+        {
+          headers: {
+            Authorization: `token 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`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setGithubData(data);
+        setUserFound(true);
+      } else {
+        console.error("Failed to fetch data from GitHub API");
+      }
+    } catch (error) {
+      console.error("Error while fetching data:", error);
+    }
+  };
+  // console.log(githubData);
   return (
     <div className="wrapper">
       <div className="wrapperHeader">
         <Header />
       </div>
       <div className="wrapperInputField">
-        <InputField fetch={fetchData} setuser={setGithubUser} />
+        <InputField
+          fetch={fetchData}
+          setuser={setGithubUser}
+          user={githubUser}
+          data={githubData}
+        />
       </div>
-      <div className="wrapperProfile">
-        <div className="wrapperPicture">
-          <ProfileImage url={githubData.avatar_url} />
+      {userFound ? (
+        <div className="wrapperProfile">
+          <div className="wrapperPicture">
+            <ProfileImage url={githubData.avatar_url} />
+          </div>
+          <div className="wrapperUserInfo">
+            <ProfileName data={githubData} />
+          </div>
         </div>
-        <div className="wrapperUserInfo">
-          <ProfileName data={githubData} />
-        </div>
-      </div>
+      ) : null}
     </div>
   );
 }

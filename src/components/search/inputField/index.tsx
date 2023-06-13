@@ -8,7 +8,6 @@ function InputField(props: any) {
         onChange={(e) => props.setuser(e.target.value)}
         className="input_search"
         placeholder="Search GitHub username…"
-        value="sabapipia"
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
