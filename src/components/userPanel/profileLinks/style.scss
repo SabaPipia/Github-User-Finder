@@ -1,0 +1,20 @@
+.profileLinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 25px;
+  gap: 20px;
+  .linkCard:nth-child(1n) {
+    display: flex;
+    &:nth-child(3n) {
+      h3 {
+        font-size: 11px;
+      }
+    }
+  }
+  .linkCard {
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 11px;
+  }
+}
