@@ -1,0 +1,17 @@
+.header {
+  display: grid;
+  width: 730px;
+  color: #fff;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 25px;
+  .name {
+    display: flex;
+    justify-content: start;
+  }
+  .themeSelector {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+    align-self: center;
+  }
+}

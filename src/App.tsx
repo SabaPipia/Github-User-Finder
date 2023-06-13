@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import WrapperComponent from "./components/wrapperComponent";
+import "./App.scss";
 
 function App() {
+  // const [githubData, setGithubData]: any = useState([]);
+  // const [githubUser, setGithubUser] = useState("SabaPipia");
+  // const fetchData = () => {
+  //   return fetch(`https://api.github.com/users/${githubUser}`)
+  //     .then((response) => response.json())
+  //     .then((data) => setGithubData(data));
+  // };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <input
+        type="text"
+        placeholder="Search for User"
+        onChange={(e) => setGithubUser(e.target.value)}
+        className="input_search"
+      />
+      <button onClick={fetchData} className="search_button">
+        Search Github
+      </button> */}
+      <WrapperComponent />
     </div>
   );
 }

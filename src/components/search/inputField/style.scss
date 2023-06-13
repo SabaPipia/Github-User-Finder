@@ -1,0 +1,35 @@
+.inputField {
+  display: flex;
+  // padding: 25px 45px;
+  position: relative;
+  input {
+    color: #fff;
+    background-color: #1e2a47;
+    width: 100%;
+    font-size: 15px;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 11px;
+    &::placeholder {
+      color: #fff;
+    }
+  }
+  svg {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  button {
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    font-size: 13px;
+    padding: 10px 22px;
+    background-color: #0079ff;
+    border: none;
+    border-radius: 9px;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+  }
+}

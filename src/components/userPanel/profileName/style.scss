@@ -1,0 +1,28 @@
+.userName {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  .name {
+    justify-self: start;
+    text-align: start;
+    h2 {
+      color: #fff;
+      font-size: 28px;
+    }
+    h6 {
+      color: #0079ff;
+      font-size: 15px;
+    }
+    p {
+      margin-top: 15px;
+      color: #b6b6b6;
+    }
+  }
+  .joined {
+    justify-self: end;
+    h3 {
+      font-size: 15px;
+      color: #b6b6b6;
+    }
+  }
+}
