@@ -6,8 +6,9 @@ interface Data {
   userName?: string;
   bio?: string;
   date?: any;
+  theme: string;
 }
-const ProfileName: React.FC<Data> = ({ name, userName, bio, date }) => {
+const ProfileName: React.FC<Data> = ({ name, userName, bio, date, theme }) => {
   const dataDate = date;
   const nDate = new Date(dataDate);
 
@@ -16,7 +17,9 @@ const ProfileName: React.FC<Data> = ({ name, userName, bio, date }) => {
   return (
     <div className="userName">
       <div className="name">
-        <h2>{name}</h2>
+        <h2 className={theme === "lightTheme" ? "lightTheme" : "darkTheme"}>
+          {name}
+        </h2>
         <h6>{userName}</h6>
         <p>{bio ? bio : "This profile has no bio"}</p>
       </div>

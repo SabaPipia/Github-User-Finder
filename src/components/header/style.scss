@@ -1,14 +1,18 @@
 .header {
-  display: grid;
+  display: flex;
+  justify-content: space-between;
   width: 730px;
   color: #fff;
-  grid-template-columns: 1fr 1fr;
   margin-bottom: 25px;
+  &.lightTheme {
+    color: #141d2f;
+  }
   .name {
     display: flex;
     justify-content: start;
   }
   .themeSelector {
+    cursor: pointer;
     display: flex;
     justify-content: end;
     gap: 15px;

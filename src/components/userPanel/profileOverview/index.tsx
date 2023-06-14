@@ -6,18 +6,20 @@ interface Data {
   publicRepos?: number;
   followingCount?: number;
   followersCount?: number;
+  theme: string;
 }
 
 const ProfileOverview: React.FC<Data> = ({
   publicRepos,
   followingCount,
   followersCount,
+  theme,
 }) => {
   return (
-    <div className="profileOverview">
-      <Card title="Repos" count={publicRepos} />
-      <Card title="Followers" count={followersCount} />
-      <Card title="Following" count={followersCount} />
+    <div className={`profileOverview ${theme}`}>
+      <Card title="Repos" count={publicRepos} theme={theme} />
+      <Card title="Followers" count={followingCount} theme={theme} />
+      <Card title="Following" count={followersCount} theme={theme} />
     </div>
   );
 };

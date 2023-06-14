@@ -6,6 +6,7 @@ import ProfileName from "../userPanel/profileName";
 import ProfileOverview from "../userPanel/profileOverview";
 import ProfileLinks from "../userPanel/profileLinks";
 import "./style.scss";
+
 interface Data {
   name: string;
   login: string;
@@ -20,10 +21,15 @@ interface Data {
   twitter_username: string;
   company: string;
 }
+interface Result {
+  text: string;
+}
 const WrapperComponent: React.FC = () => {
   const [githubData, setGithubData] = useState<Data | null>(null);
   const [githubUser, setGithubUser]: any = useState("");
   const [userFound, setUserFound]: any = useState(false);
+  const [searchResult, setSearchResult] = useState<Result | string>();
+  const [theme, setTheme]: any = useState("darkTheme");
 
   const Token = "{yourToken}";
 
@@ -41,55 +47,62 @@ const WrapperComponent: React.FC = () => {
         const data = await response.json();
         setGithubData(data);
         setUserFound(true);
+        setSearchResult("");
       } else {
-        console.error("Failed to fetch data from GitHub API");
+        setSearchResult("No Result");
+        setUserFound(false);
       }
     } catch (error) {
       console.error("Error while fetching data:", error);
     }
   };
 
-  console.log(githubData);
-
   return (
-    <div className="wrapper">
-      <div className="wrapperHeader">
-        <Header />
-      </div>
-      <div className="wrapperInputField">
-        <InputField
-          fetch={fetchData}
-          setuser={setGithubUser}
-          user={githubUser}
-          data={githubData}
-        />
-      </div>
-      {userFound ? (
-        <div className="wrapperProfile">
-          <div className="wrapperPicture">
-            <ProfileImage avatarUrl={githubData?.avatar_url} />
-          </div>
-          <div className="wrapperUserInfo">
-            <ProfileName
-              name={githubData?.name}
-              userName={githubData?.login}
-              bio={githubData?.bio}
-              date={githubData?.created_at}
-            />
-            <ProfileOverview
-              publicRepos={githubData?.public_repos}
-              followingCount={githubData?.following}
-              followersCount={githubData?.followers}
-            />
-            <ProfileLinks
-              location={githubData?.location}
-              url={githubData?.html_url}
-              twitterUsername={githubData?.twitter_username}
-              company={githubData?.company}
-            />
-          </div>
+    <div className={`mainBackground ${theme}`}>
+      <div className="wrapper">
+        <div className="wrapperHeader">
+          <Header changeTheme={setTheme} theme={theme} />
         </div>
-      ) : null}
+        <div className="wrapperInputField">
+          <InputField
+            searchResult={searchResult}
+            fetch={fetchData}
+            setuser={setGithubUser}
+            user={githubUser}
+            data={githubData}
+            theme={theme}
+          />
+        </div>
+        {userFound ? (
+          <div className={`wrapperProfile ${theme}`}>
+            <div className="wrapperPicture">
+              <ProfileImage avatarUrl={githubData?.avatar_url} />
+            </div>
+            <div className="wrapperUserInfo">
+              <ProfileName
+                name={githubData?.name}
+                userName={githubData?.login}
+                bio={githubData?.bio}
+                date={githubData?.created_at}
+                theme={theme}
+              />
+              <ProfileOverview
+                publicRepos={githubData?.public_repos}
+                followingCount={githubData?.following}
+                followersCount={githubData?.followers}
+                theme={theme}
+              />
+              <ProfileLinks
+                location={githubData?.location}
+                url={githubData?.html_url}
+                twitterUsername={githubData?.twitter_username}
+                company={githubData?.company}
+                theme={theme}
+              />
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };

@@ -15,6 +15,17 @@
     align-items: center;
     gap: 10px;
     color: #fff;
+
     font-size: 11px;
+    &.lightTheme {
+      color: #141d2f;
+    }
+  }
+  .linkStyle {
+    cursor: pointer;
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
   }
 }

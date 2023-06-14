@@ -8,6 +8,9 @@
     h2 {
       color: #fff;
       font-size: 28px;
+      &.lightTheme {
+        color: #141d2f;
+      }
     }
     h6 {
       color: #0079ff;
@@ -15,14 +18,15 @@
     }
     p {
       margin-top: 15px;
-      color: #b6b6b6;
+      color: #acacac;
     }
   }
   .joined {
     justify-self: end;
     h3 {
       font-size: 15px;
-      color: #b6b6b6;
+      color: #acacac;
     }
   }
 }
+// theme
