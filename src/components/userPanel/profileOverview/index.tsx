@@ -2,19 +2,22 @@ import React from "react";
 import Card from "./card";
 import "./style.scss";
 
-interface ProfileOverviewProps {
-  data: {
-    public_repos: number;
-    followers: number;
-    following: number;
-  };
+interface Data {
+  publicRepos?: number;
+  followingCount?: number;
+  followersCount?: number;
 }
-const ProfileOverview: React.FC<ProfileOverviewProps> = (props) => {
+
+const ProfileOverview: React.FC<Data> = ({
+  publicRepos,
+  followingCount,
+  followersCount,
+}) => {
   return (
     <div className="profileOverview">
-      <Card data={{ title: "Repos", count: props.data.public_repos }} />
-      <Card data={{ title: "Followers", count: props.data.followers }} />
-      <Card data={{ title: "Following", count: props.data.following }} />
+      <Card title="Repos" count={publicRepos} />
+      <Card title="Followers" count={followersCount} />
+      <Card title="Following" count={followersCount} />
     </div>
   );
 };
