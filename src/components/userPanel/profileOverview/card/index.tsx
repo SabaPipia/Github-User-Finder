@@ -2,17 +2,15 @@ import React from "react";
 import "./style.scss";
 
 interface CardProps {
-  data: {
-    title: string;
-    count: number;
-  };
+  title?: string;
+  count?: number | null;
 }
 
-const Card: React.FC<CardProps> = (props) => {
+const Card: React.FC<CardProps> = ({ title, count }) => {
   return (
     <div className="card">
-      <h1>{props.data.title}</h1>
-      <h2>{props.data.count}</h2>
+      <h1>{title}</h1>
+      <h2>{count}</h2>
     </div>
   );
 };

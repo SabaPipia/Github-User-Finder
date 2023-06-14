@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../header";
 import InputField from "../search/inputField";
 import ProfileImage from "../userPanel/profileImage";
@@ -6,10 +6,23 @@ import ProfileName from "../userPanel/profileName";
 import ProfileOverview from "../userPanel/profileOverview";
 import ProfileLinks from "../userPanel/profileLinks";
 import "./style.scss";
-
-function WrapperComponent() {
-  const [githubData, setGithubData]: any = useState([]);
-  const [githubUser, setGithubUser]: any = useState();
+interface Data {
+  name: string;
+  login: string;
+  bio: string;
+  created_at: string | number;
+  public_repos: number;
+  following: number;
+  followers: number;
+  avatar_url: string;
+  location: string;
+  html_url: string;
+  twitter_username: string;
+  company: string;
+}
+const WrapperComponent: React.FC = () => {
+  const [githubData, setGithubData] = useState<Data | null>(null);
+  const [githubUser, setGithubUser]: any = useState("");
   const [userFound, setUserFound]: any = useState(false);
 
   const Token = "{yourToken}";
@@ -35,12 +48,9 @@ function WrapperComponent() {
       console.error("Error while fetching data:", error);
     }
   };
+
   console.log(githubData);
-  const githubUserDataI = {
-    public_repos: githubData.public_repos,
-    followers: githubData.followers,
-    following: githubData.following,
-  };
+
   return (
     <div className="wrapper">
       <div className="wrapperHeader">
@@ -57,17 +67,31 @@ function WrapperComponent() {
       {userFound ? (
         <div className="wrapperProfile">
           <div className="wrapperPicture">
-            <ProfileImage url={githubData.avatar_url} />
+            <ProfileImage avatarUrl={githubData?.avatar_url} />
           </div>
           <div className="wrapperUserInfo">
-            <ProfileName data={githubData} />
-            <ProfileOverview data={githubUserDataI} />
-            <ProfileLinks data={githubData} />
+            <ProfileName
+              name={githubData?.name}
+              userName={githubData?.login}
+              bio={githubData?.bio}
+              date={githubData?.created_at}
+            />
+            <ProfileOverview
+              publicRepos={githubData?.public_repos}
+              followingCount={githubData?.following}
+              followersCount={githubData?.followers}
+            />
+            <ProfileLinks
+              location={githubData?.location}
+              url={githubData?.html_url}
+              twitterUsername={githubData?.twitter_username}
+              company={githubData?.company}
+            />
           </div>
         </div>
       ) : null}
     </div>
   );
-}
+};
 
 export default WrapperComponent;

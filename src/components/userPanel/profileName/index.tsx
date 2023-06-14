@@ -1,24 +1,30 @@
 import React from "react";
 import "./style.scss";
 
-function ProfileName(props: any) {
-  const dateString = props.data.created_at;
-  const date = new Date(dateString);
+interface Data {
+  name?: string;
+  userName?: string;
+  bio?: string;
+  date?: any;
+}
+const ProfileName: React.FC<Data> = ({ name, userName, bio, date }) => {
+  const dataDate = date;
+  const nDate = new Date(dataDate);
 
   const options: any = { day: "2-digit", month: "short", year: "numeric" };
-  const formattedDate = date.toLocaleDateString("en-US", options);
+  const formattedDate = nDate.toLocaleDateString("en-US", options);
   return (
     <div className="userName">
       <div className="name">
-        <h2>{props.data.name}</h2>
-        <h6>{props.data.login}</h6>
-        <p>{props.data.bio ? props.data.bio : "This profile has no bio"}</p>
+        <h2>{name}</h2>
+        <h6>{userName}</h6>
+        <p>{bio ? bio : "This profile has no bio"}</p>
       </div>
       <div className="joined">
         <h3>Joined {formattedDate}</h3>
       </div>
     </div>
   );
-}
+};
 
 export default ProfileName;
