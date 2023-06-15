@@ -1,7 +1,8 @@
 import React from "react";
 import "./style.scss";
+import { Input } from "../../../interface";
 
-function InputField(props: any) {
+const InputField: React.FC<Input> = (props) => {
   return (
     <div className={`inputField`}>
       <input
@@ -15,7 +16,6 @@ function InputField(props: any) {
         xmlns="http://www.w3.org/2000/svg"
         width="30"
         height="30"
-        fill="#fff"
         className={`bi bi-search ${props.theme}`}
         viewBox="0 0 16 16"
       >
@@ -25,6 +25,6 @@ function InputField(props: any) {
       <button onClick={props.fetch}>Search</button>
     </div>
   );
-}
+};
 
 export default InputField;

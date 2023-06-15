@@ -1,8 +1,9 @@
 import React from "react";
 import "./style.scss";
 import { Light, Dark } from "../icons";
+import { Theme } from "../../interface";
 
-const Header = (props: any) => {
+const Header: React.FC<Theme> = (props) => {
   return (
     <div className={`header ${props.theme}`}>
       <div className="name">

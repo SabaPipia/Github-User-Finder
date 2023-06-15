@@ -1,17 +1,12 @@
 import React from "react";
 import "./style.scss";
+import { CardO } from "../../../../interface";
 
-interface CardProps {
-  title?: string;
-  count?: number | null;
-  theme: string;
-}
-
-const Card: React.FC<CardProps> = ({ title, count, theme }) => {
+const Card: React.FC<CardO> = (props) => {
   return (
-    <div className={`card ${theme}`}>
-      <h1>{title}</h1>
-      <h2>{count}</h2>
+    <div className={`card ${props.theme}`}>
+      <h1>{props.title}</h1>
+      <h2>{props.count}</h2>
     </div>
   );
 };

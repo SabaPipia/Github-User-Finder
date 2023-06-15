@@ -1,62 +1,46 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import Header from "../header";
 import InputField from "../search/inputField";
 import ProfileImage from "../userPanel/profileImage";
 import ProfileName from "../userPanel/profileName";
 import ProfileOverview from "../userPanel/profileOverview";
 import ProfileLinks from "../userPanel/profileLinks";
+import { User } from "../../interface";
+
 import "./style.scss";
 
-interface Data {
-  name: string;
-  login: string;
-  bio: string;
-  created_at: string | number;
-  public_repos: number;
-  following: number;
-  followers: number;
-  avatar_url: string;
-  location: string;
-  html_url: string;
-  twitter_username: string;
-  company: string;
-}
-interface Result {
-  text: string;
-}
-const WrapperComponent: React.FC = () => {
-  const [githubData, setGithubData] = useState<Data | null>(null);
-  const [githubUser, setGithubUser]: any = useState("");
-  const [userFound, setUserFound]: any = useState(false);
-  const [searchResult, setSearchResult] = useState<Result | string>();
-  const [theme, setTheme]: any = useState("darkTheme");
+const WrapperComponent = () => {
+  const [githubData, setGithubData] = useState<User | undefined>();
+  const [githubUser, setGithubUser] = useState<string>("");
+  const [searchResult, setSearchResult] = useState<string>("");
+  const [userFound, setUsetFound] = useState<boolean>(false);
+  const [theme, setTheme] = useState<string>("darkTheme");
 
-  const Token = "{yourToken}";
+  const Token = "yourToken";
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `https://api.github.com/users/${githubUser}`,
-        {
-          headers: {
-            Authorization: `token ${Token}`,
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setGithubData(data);
-        setUserFound(true);
-        setSearchResult("");
-      } else {
-        setSearchResult("No Result");
-        setUserFound(false);
-      }
+      // setIsLoading(true);
+      const resp = await axios(`https://api.github.com/users/${githubUser}`, {
+        headers: {
+          Authorization: `token ${Token}`,
+        },
+      });
+      const data = resp.data;
+      setGithubData(data);
+      setSearchResult("");
+      setUsetFound(true);
     } catch (error) {
-      console.error("Error while fetching data:", error);
+      setSearchResult("Not found");
+      setUsetFound(false);
     }
   };
 
+  const handleFetchData = () => {
+    fetchData();
+  };
   return (
     <div className={`mainBackground ${theme}`}>
       <div className="wrapper">
@@ -66,17 +50,19 @@ const WrapperComponent: React.FC = () => {
         <div className="wrapperInputField">
           <InputField
             searchResult={searchResult}
-            fetch={fetchData}
+            fetch={handleFetchData}
             setuser={setGithubUser}
             user={githubUser}
-            data={githubData}
+            // data={githubData}
             theme={theme}
           />
         </div>
         {userFound ? (
           <div className={`wrapperProfile ${theme}`}>
             <div className="wrapperPicture">
-              <ProfileImage avatarUrl={githubData?.avatar_url} />
+              {githubData ? (
+                <ProfileImage avatarUrl={githubData.avatar_url} />
+              ) : null}
             </div>
             <div className="wrapperUserInfo">
               <ProfileName
