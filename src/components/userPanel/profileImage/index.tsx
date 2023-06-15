@@ -1,12 +1,11 @@
 import React from "react";
 import "./style.scss";
-interface Data {
-  avatarUrl?: string;
-}
-const ProfileImage: React.FC<Data> = ({ avatarUrl }) => {
+import { Avatar } from "../../../interface";
+
+const ProfileImage: React.FC<Avatar> = (props) => {
   return (
     <div className="profileImage">
-      <img src={avatarUrl} alt="" width="100px"></img>
+      <img src={props.avatarUrl} alt="" width="100px"></img>
     </div>
   );
 };

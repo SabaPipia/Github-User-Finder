@@ -24,7 +24,7 @@
   .lightTheme {
     background-color: #fff;
     box-shadow: 0px 10px 30px #1e2a474d;
-    color: black;
+    // color: black;
   }
   svg {
     position: absolute;
@@ -32,6 +32,7 @@
     left: 10px;
     &.lightTheme {
       fill: #1e2a47;
+      background: none;
     }
     &.darkTheme {
       fill: #fff;

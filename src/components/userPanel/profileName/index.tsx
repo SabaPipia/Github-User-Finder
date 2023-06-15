@@ -1,15 +1,9 @@
 import React from "react";
 import "./style.scss";
+import { ProfileN } from "../../../interface";
 
-interface Data {
-  name?: string;
-  userName?: string;
-  bio?: string;
-  date?: any;
-  theme: string;
-}
-const ProfileName: React.FC<Data> = ({ name, userName, bio, date, theme }) => {
-  const dataDate = date;
+const ProfileName: React.FC<ProfileN> = (props) => {
+  const dataDate = props.date;
   const nDate = new Date(dataDate);
 
   const options: any = { day: "2-digit", month: "short", year: "numeric" };
@@ -17,11 +11,13 @@ const ProfileName: React.FC<Data> = ({ name, userName, bio, date, theme }) => {
   return (
     <div className="userName">
       <div className="name">
-        <h2 className={theme === "lightTheme" ? "lightTheme" : "darkTheme"}>
-          {name}
+        <h2
+          className={props.theme === "lightTheme" ? "lightTheme" : "darkTheme"}
+        >
+          {props.name}
         </h2>
-        <h6>{userName}</h6>
-        <p>{bio ? bio : "This profile has no bio"}</p>
+        <h6>{props.userName}</h6>
+        <p>{props.bio ? props.bio : "This profile has no bio"}</p>
       </div>
       <div className="joined">
         <h3>Joined {formattedDate}</h3>
